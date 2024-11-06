@@ -1,0 +1,9 @@
+kind: pipeline
+type: docker      # 在 Docker 內部執行管道命令
+name: test       # 可自行定義的名稱
+
+steps:
+  - name: setup python environment
+    image: python:3.9  # 使用 Python 3.9 的官方映像，你也可以指定其他版本
+    commands:
+      - python example.py
