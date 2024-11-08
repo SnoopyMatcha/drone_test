@@ -17,3 +17,4 @@ steps:
         from_secret: admin
       password:
         from_secret: Harbor12345
+      insecure: true
