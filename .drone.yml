@@ -3,7 +3,17 @@ type: docker      # 在 Docker 內部執行管道命令
 name: test       # 可自行定義的名稱
 
 steps:
-  - name: setup python environment
-    image: python:3.9  # 使用 Python 3.9 的官方映像，你也可以指定其他版本
+  - name: tag-docker-image
+    image: alpine
     commands:
-      - python example.py
+    - echo -n "$(date +'%Y-%m-%d_%H-%M')_${DRONE_COMMIT}, latest" > .tags
+
+  - name: build-docker-image
+    image: plugins/docker
+    settings:
+      repo: host.docker.internal/test/drone_test
+      registry: host.docker.internal
+      username:
+        from_secret: admin
+      password:
+        from_secret: Harbor12345
