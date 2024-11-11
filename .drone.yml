@@ -2,7 +2,16 @@ kind: pipeline
 type: docker      # 在 Docker 內部執行管道命令
 name: test       # 可自行定義的名稱
 
+clone:
+  disable: true
+
 steps:
+  - name: clone
+    image: alpine/git
+    commands:
+    - git clone https://github.com/amascloud/AmasIotcPms.git .
+    - git checkout $DRONE_COMMIT
+
   - name: tag-docker-image
     image: alpine
     commands:
