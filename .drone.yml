@@ -29,8 +29,8 @@ steps:
       - ssh-add $HOME/.ssh/id_rsa    # Add the private key to the SSH agent
       - ssh-keyscan -p $GIT_PORT $GIT_HOST > $HOME/.ssh/known_hosts
       - git clone $DRONE_GIT_SSH_URL .
-      - git submodule update --init --recursive
-      - git switch -c develop --track origin/develop 
+      - git submodule update --init --recursive --remote
+      - git switch origin/develop 
       - git status
 
   - name: tag-docker-image
