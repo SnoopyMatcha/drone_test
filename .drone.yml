@@ -16,8 +16,9 @@ steps:
   #     username: admin
   #     password: Harbor12345
   #     insecure: true
-# trigger: 
-#   event:
-#   - push
-#   branch:
-#   - main
+trigger: 
+  event:
+  - push
+  - custom
+  branch:
+  - main
