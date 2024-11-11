@@ -19,7 +19,7 @@ steps:
     commands:
       - ls -la
       - mkdir -p $HOME/.ssh/
-      - echo $SSHKEY > $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa
+      - echo $SSHKEY > $HOME/.ssh/id_rsa && chmod 644 $HOME/.ssh/id_rsa
       - ssh-keyscan -p $GIT_PORT $GIT_HOST > $HOME/.ssh/known_hosts 2> /dev/null
       - git clone git@github.com:amascloud/AmasIotcPortal.git .
       - git submodule update --init --recursive
