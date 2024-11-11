@@ -19,9 +19,13 @@ steps:
     commands:
       - ls -la
       - mkdir -p $HOME/.ssh/
-      - echo $SSHKEY > $HOME/.ssh/id_rsa && chmod 644 $HOME/.ssh/id_rsa
+      - echo "$SSHKEY" > $HOME/.ssh/id_rsa
+      - chmod 600 $HOME/.ssh/id_rsa  # Set strict permissions on the key
+      - chmod 700 $HOME/.ssh         # Ensure .ssh directory has correct permissions
+      - eval $(ssh-agent -s)         # Start the SSH agent
+      - ssh-add $HOME/.ssh/id_rsa    # Add the private key to the SSH agent
       - ssh-keyscan -p $GIT_PORT $GIT_HOST > $HOME/.ssh/known_hosts 2> /dev/null
-      - git clone git@github.com:amascloud/AmasIotcPortal.git .
+      - git clone $DRONE_GIT_SSH_URL .
       - git submodule update --init --recursive
       - git -c advice.detachedHead=false checkout $DRONE_COMMIT
       - git status
