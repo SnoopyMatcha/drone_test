@@ -31,6 +31,7 @@ steps:
       - git clone $DRONE_GIT_SSH_URL .
       - git submodule update --init --recursive --remote
       - git switch develop
+      - git pull
       - git status
 
   - name: tag-docker-image
