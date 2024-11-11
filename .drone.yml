@@ -12,6 +12,7 @@ steps:
     image: plugins/docker
     settings:
       repo: host.docker.internal:80/test/drone_test
+      registry: host.docker.internal:80
       username:
         from_secret: admin
       password:
