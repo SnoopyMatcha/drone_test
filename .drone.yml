@@ -13,8 +13,6 @@ steps:
     settings:
       repo: host.docker.internal:80/test/drone_test
       registry: host.docker.internal:80
-      username:
-        from_secret: admin
-      password:
-        from_secret: Harbor12345
+      username: admin
+      password: Harbor12345
       insecure: true
