@@ -7,10 +7,22 @@ clone:
 
 steps:
   - name: clone
-    image: alpine/git
+    environment:
+       SSHKEY:
+         from_secret: drone_ci_sshkey_file
+       GIT_HOST:
+         from_secret: git_server_host
+       GIT_PORT:
+         from_secret: git_server_port
     commands:
-    - git clone https://github.com/amascloud/AmasIotcPms.git .
-    - git checkout $DRONE_COMMIT
+      - ls -la
+      - mkdir -p $HOME/.ssh/
+      - echo $SSHKEY > $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa
+      - ssh-keyscan -p $GIT_PORT $GIT_HOST > $HOME/.ssh/known_hosts 2> /dev/null
+      - git clone git@github.com:amascloud/AmasIotcPortal.git .
+      - git submodule update --init --recursive
+      - git -c advice.detachedHead=false checkout $DRONE_COMMIT
+      - git status
 
   - name: tag-docker-image
     image: alpine
