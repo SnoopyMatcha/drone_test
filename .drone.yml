@@ -11,8 +11,7 @@ steps:
   - name: build-docker-image
     image: plugins/docker
     settings:
-      repo: host.docker.internal/test/drone_test
-      registry: host.docker.internal
+      repo: host.docker.internal:80/test/drone_test
       username:
         from_secret: admin
       password:
