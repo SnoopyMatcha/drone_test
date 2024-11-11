@@ -10,12 +10,14 @@ steps:
     image: bitnami/git
     pull: if-not-exists
     environment:
-       SSHKEY:
-         from_secret: drone_ci_sshkey_file
-       GIT_HOST:
-         from_secret: git_server_host
-       GIT_PORT:
-         from_secret: git_server_port
+      SSHKEY:
+        from_secret: drone_ci_sshkey_file
+      GIT_HOST:
+        from_secret: git_server_host
+      GIT_PORT:
+        from_secret: git_server_port
+      DRONE_GIT_SSH_URL:
+        from_secret: git_ssh_url
     commands:
       - ls -la
       - mkdir -p $HOME/.ssh/
