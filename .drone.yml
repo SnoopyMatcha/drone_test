@@ -7,6 +7,8 @@ clone:
 
 steps:
   - name: clone
+    image: bitnami/git
+    pull: if-not-exists
     environment:
        SSHKEY:
          from_secret: drone_ci_sshkey_file
